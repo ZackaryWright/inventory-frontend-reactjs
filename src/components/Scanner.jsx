@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Quagga from "@ericblade/quagga2";
+
 function getMedian(arr) {
   arr.sort((a, b) => a - b);
   const half = Math.floor(arr.length / 2);
@@ -8,6 +9,7 @@ function getMedian(arr) {
   }
   return (arr[half - 1] + arr[half]) / 2;
 }
+
 function getMedianOfCodeErrors(decodedCodes) {
   const errors = decodedCodes
     .filter((x) => x.error !== undefined)
@@ -15,8 +17,10 @@ function getMedianOfCodeErrors(decodedCodes) {
   const medianOfErrors = getMedian(errors);
   return medianOfErrors;
 }
+
 class Scanner extends Component {
   componentDidMount() {
+    console.log('mounted');
     Quagga.init(
       {
         inputStream: {
@@ -87,6 +91,7 @@ class Scanner extends Component {
     });
   }
   componentWillUnmount() {
+    console.log('unmounted');
     Quagga.offDetected(this._onDetected);
   }
   _errorCheck = (result) => {
